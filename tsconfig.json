@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    /* === Target & Module === */
+    "target": "ESNext",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+
+    /* === Interop & JSON Imports === */
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+
+    /* === Type Definitions === */
+    "types": ["node", "@playwright/test"],
+
+    /* === Base Settings === */
+    "baseUrl": "./",
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+
+    /* === Output Settings (optional for tests) === */
+    "outDir": "dist"
+  },
+
+  /* === Included Project Folders === */
+  "include": ["tests", "pages", "utils", "test-data"],
+
+  /* === Exclude Unnecessary === */
+  "exclude": ["node_modules", "dist", "playwright-report"]
+}
