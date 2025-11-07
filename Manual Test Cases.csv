@@ -1,0 +1,79 @@
+Test ID,Objective,Priority,Type,Prerequisites,Test Data,Test Steps,Expected Results,Acceptance Criteria
+TC_001_Registration_NewUser,Verify that a new user can register successfully using a unique email.,P0,Functional,User is logged out and on the homepage.,"First Name: John
+Last Name: Doe
+Gender: Male/Female           Email:test+<timestamp>@example.com
+Password: Test@123
+Confirm Password: Test@123","1. Open homepage.
+2. Click “Register”.
+3. Fill all required fields (Firstname, Lastname, Gender, Email, Password, Confirm Password).
+4. Click on the “Register” button.","User is successfully registered and automatically logged in. ""My Account"" link appears.","Registration complete shows on screen.user session is active; ""My Account"" is visible.   "
+TC_002_Registration_ExistingEmail,Verify that the system shows an error when attempting to register with an existing email,P1,Negative,An existing account already registered in the system.,"Existing email (e.g., testuser@example.com)                                                                                                                                                        Valid password","1. Open the Register page.
+2. Fill all required fields (Firstname, Lastname, Gender, Password, Confirm Password).
+3. Enter an already registered email address.
+4. Click the “Register” button","Registration is rejected. System displays error: ""The specified email already exists.""",The error message is visible; user stays on registration page; no new account is created.
+TC_003_Registration_ShortPassword,Verify that registration fails when password length is less than the minimum requirement,P2,Negative/UI,User is on Register page.,"Unique email
+Short password (e.g., ""123"") — LESS than 6 characters","1. Enter unique email.
+2. Enter password shorter than 6 characters.
+3. Enter same short password in Confirm Password.
+4. Click Register","Registration fails; error message appears:
+""The password should have at least 6 characters.""","User remains on registration page, account is NOT created"
+TC_004_Login_Valid,Verify error message for incorrect password,P0,Functional,Registered user exists.,Known valid email/password.,"1. Open Login page.
+2. Enter valid email and password.
+3. Click Login",User is authenticated; redirected to account/home.,"My Account"" and ""Logout"" are visible; user session created."
+TC_005_Login_InvalidPassword,Verify error for invalid password on login.,P1,Negative,Registered email exists.,Valid email+ incorrect password.,"1. Open Login
+2. Enter registered email + wrong password
+3. Click Login","Error message ""Login was unsuccessful. Please correct the errors and try again.The credentials provided are incorrect"" is displayed",No session created; user stays on Login page
+TC_006_Navigation_ToNotebook,Navigate to 14.1-inch Laptop via Computers > Notebooks.,P0,Functional/UI,None,N/A,"1. Open homepage                     2. Hover Computers
+3. Click Notebooks
+4. Click '14.1-inch Laptop'",Product page for 14.1-inch Laptop should open,"Product name, price, stock status, image, and Add to cart must match expected"
+TC_007_PDP_PriceConsistency,Verify product name & price are consistent across PDP ? Cart ? Checkout.,P0,Functional,On PDP of 14.1-inch Laptop,N/A,"1. Note name & price
+2. Add to cart
+3. Open Cart
+4. Proceed to Checkout",Name and price match stay same everywhere.,No mismatch in displayed values.
+TC_008_Cart_AddQuantity1,Add item to cart and verify qty=1.,P0,Functional/UI,User on PDP.,N/A,"1. Add to cart
+2. Open cart",Cart shows 1 item subtotal = price * 1,Cart badge count = 1
+TC_009_Cart_UpdateQuantityZero,Set quantity to 0 and check behavior.,P2,Boundary/Negative,Item present in cart.,Set Qty=0,"1. Set qty to 0.                                             
+2.click on check box                    3. Click Update.",Your Shopping Cart is empty!,Cart never shows a negative or zero subtotal.
+TC_010_Cart_MaxQuantity,Verify maximum quantity limit handling.,P2,Boundary,Item in cart.,Qty=100 (or max allowed),"1. Set qty to 100
+2. Update cart",System  recalculates total correctly according to entered quantity.,"Correct totals, no overflow or crash."
+TC_011_Cart_SubtotalCalc,Verify subtotal = sum of line items.,P0,Functional,Multiple items in cart.,Items with known prices,"1. Add 2+ items
+2. Compare displayed subtotal with manual calculation",Subtotal is accurate,No calculation error beyond decimal
+TC_012_Cart_RemoveItem,Remove item and verify cart updates,P1,Functional/UI,At least one item in cart.,N/A,"1. Open cart page.
+2. Select the Remove checkbox for the item.
+3. Click Update Shopping Cart.","Item is removed, subtotal updates.",Empty cart message appears if all items removed
+TC_013_Checkout_BillingNewAddress,Complete checkout with a new billing address,P0,Functional/Integration,User is logged in and has at least one item in the cart.,"Country: Valid country (e.g., United States)
+State/Province: Valid state (if applicable)
+First Name: Valid first name
+Last Name: Valid last name
+Email: Valid email address
+Address Line 1: Valid street address
+Address Line 2: Optional secondary address
+City: Valid city
+Zip/Postal Code: Valid zip/postal code
+Phone Number: Valid phone number
+Fax Number: Optional","1. Proceed to checkout
+2. Enter billing details
+3. Continue",Billing address is successfully saved and accepted.,"User is directed to the Shipping Address step.
+No validation errors appear.
+Billing address is stored for the current order"
+TC_014_Checkout_ShippingSameAsBilling,Use shipping address same as billing and proceed.,P1,Functional,Billing address provided.,Same-as-billing option checked.,"1. Select 'Ship to same address'
+2. Continue",Shipping address auto-filled and accepted.,User proceeds without additional input.
+TC_015_Checkout_MissingMandatory,Verify validation when mandatory field missing,P1,Negative,On billing or shipping step.,Blank city or zip.,"1. Clear required field
+2. Click Continue",Validation highlights missing field with message.,Cannot proceed until field is filling
+TC_016_ShippingMethod_Select,Select shipping method.,P1,Functional,Shipping method step reached,"Choose available method (e.g., Ground).","1. Select shipping method
+2. Continue","Method saved, payment method step loads.",Selected value persists.
+TC_017_PaymentMethod_Select,Select payment method ,P1,Functional,Reached payment method step.,"Any available option (COD, Check/Money Order, Credit Card, Purchase Order)","1. Select payment method
+2. Continue",Payment info section appears.,Selected method persists to confirmation.
+TC_018_PlaceOrder_ThankYou_OrderNumber,Place order and verify Thank You page shows valid Order Number (regex).,P0,Functional/Integration,All checkout steps completed,N/A,"1. Confirm order
+2. On Thank You page capture Order Number",Order successful; order number displayed.,"Order number matches regex pattern (e.g., #2129863)."
+TC_019_CrossBrowser_Chrome,Validate purchase flow in Chrome latest.,P0,Compatibility,Chrome installed.,N/A,Run happy path in Chrome,Flow completes without critical UI issues.,"Pages render correctly, all actions succeed."
+TC_020_CrossBrowser_Firefox,Validate purchase flow in Firefox latest.,P1,Compatibility,Firefox installed.,N/A,Run happy path in Firefox,Flow completes without critical UI issues.,Key elements functioning normally.
+TC_021_Device_MobileViewport,Validate purchase flow on mobile viewport.,P1,Compatibility/UI,Responsive design mode open.,"Mobile size (e.g., 375×812)","1. Set viewport to mobile size
+2. Run happy path",No content clipping; menu accessible,All controls reachable no horizontal scroll on core pages.
+TC_022_A11y_KeyboardOnly,Validate keyboard-only navigation.,P2,Accessibility,Use Tab/Shift+Tab/Enter/Space.,N/A,"1. Navigate all forms and buttons using keyboard.
+2. Complete checkout flow.",Visible focus indicator and operable elements.,"No keyboard traps, logical focus order."
+TC_023_A11y_FieldLabels_AltText,Verify labels for fields & alt text for images,P2,Accessibility/UI,Pages with forms/images.,N/A,"1. Inspect label for/id or aria-label
+2. Check alt text for product images.","All fields have accessible labels, images have alt text",Meets basic WCAG labeling requirements.
+TC_024_PriceTaxShipping_Calculations,"Verify price, tax, shipping, and total calculations",P0,Functional,Cart with taxable items,Known prices + tax rules,"1.  Proceed to checkout summary
+2. Record subtotal, tax, shipping, total
+3. Verify formula: Total = Subtotal + Tax + Shipping – Discounts",Calculations are accurate,No mismatch > $0.01; totals match confirmation page
